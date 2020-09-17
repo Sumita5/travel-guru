@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import Header from '../Header/Header';
 import './Home.css';
 import Main from '../Main/Main';
@@ -36,15 +36,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
+// export const SpotContext = createContext();
 
 const Home = () => {
     const classes = useStyles();
     const [spots, setSpots] = useState((fakeData));
     return (
-      
-            <div className="home">
-                <Header/>
+    // <SpotContext.Provider value={[spots, setSpots]}>
+        <div className="home">
+                  <Header/>
                 
                 {
                         spots.map(spot => <Main
@@ -60,6 +60,8 @@ const Home = () => {
             </Link>
                 
             </div>
+    // </SpotContext.Provider>
+            
             
        
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Card, CardActions, CardContent } from '@material-ui/core';
@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import { orange } from '@material-ui/core/colors';
 import './Booking.css';
 import fakeData from '../../fakeData/fakeData';
+import { Link, useParams } from 'react-router-dom';
+
+
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -39,23 +42,19 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   card:{
-    
-    
-    //  width: theme.spacing(66),
-    // height: theme.spacing(30),
     minWidth: 275,
-
   },
 }));
 
 const Booking = () => {
-    const [spots, setSpots] = useState((fakeData));
+    const {locationName} = useParams();
+    const location = fakeData.find(city => city.name === locationName);
     const classes = useStyles();
     return (
         <div className='booking'>
             <div className='detail'>
-                <h1>COX'S BAZAR</h1>
-                <p>Cox's Bazar is a town on the southeast coast of Bangladesh. It's known for its very long, sandy beachfront, stretching from Sea Beach in the north to Kolatoli Beach in the south. Aggameda Khyang monastery is home to bronze statues and centuries-old Buddhist manuscripts. South of town, the tropical rainforest of Himchari National Park has waterfalls and many birds. North, sea turtles breed on nearby Sonadia Island.</p>
+          <h1>{location.name}</h1>
+                <p>{location.description}</p>
             </div>
             <div className='bookingCard'>
             <Card className={classes.card}>
@@ -64,13 +63,13 @@ const Booking = () => {
                     <TextField
                         id="outlined-uncontrolled"
                         label="Origin"
-                        defaultValue="Dhaka"
+                        defaultValue="DHAKA"
                         variant="outlined"
                     />
                     <TextField
                         id="outlined-uncontrolled"
                         label="Destination"
-                        defaultValue="Cox's Bazar"
+                        defaultValue={location.name}
                         variant="outlined"
                     />
                     <form className={classes.container}>
@@ -94,15 +93,18 @@ const Booking = () => {
                     
                     
                     <CardActions>
+                        <Link to={"/hotelroom/"+ location.name} >
                         <ColorButton>
                             Start Booking
                         </ColorButton>
+                        </Link>
                     </CardActions>
                     
                 </form>
             </CardContent>
                 </Card>
             </div>
+            
         </div>
         
     );

@@ -1,19 +1,18 @@
 div.gallery {
-    margin: 12px;
+    margin: 5px;
     border: 1px solid #ccc;
     float: left;
-    width: 310px;
-    height: 400px;
-    color: white;
+    width: 180px;
+    color: black;
   }
   
   div.gallery:hover {
-    border: 3px solid yellow;
+    border: 1px solid #777;
   }
   
   div.gallery img {
     width: 100%;
-    height: 250px;
+    height: auto;
   }
   
   div.desc {
