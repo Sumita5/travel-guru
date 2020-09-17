@@ -1,0 +1,14 @@
+.header{
+    width: auto;
+    height: 40px;
+    padding: 30px 80px 10px;
+    border: 1px solid transparent;
+}
+.logo {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+}
+button {
+    color: white;
+}
