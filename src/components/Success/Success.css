@@ -1,0 +1,11 @@
+.success{
+    width: 100%;
+    height: 700px;
+    background: url("../../images/Home.png");
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: normal;
+    color: white;
+    margin: 0;
+    padding: 10px;
+}

@@ -7,6 +7,7 @@ import { orange } from '@material-ui/core/colors';
 import './Booking.css';
 import spotData from '../../fakeData/spotData';
 import { Link, useParams } from 'react-router-dom';
+import Header from '../Header/Header';
 
 
 

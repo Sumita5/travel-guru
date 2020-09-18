@@ -9,7 +9,7 @@ const Success = () => {
     const {hotelName} = useParams();
     const hotelDetails = hotelData.filter(booked => booked.hotelName === hotelName);
     return (
-        <div> 
+        <div className='success'> 
         <h1>Booking Success!</h1>   
         {hotelDetails.map(place => <RoomDetail showBooking={false} bookingPlace={place}></RoomDetail>)}     
         </div>

@@ -1,13 +1,13 @@
 div.roomdetail {
-    margin: 70px;
-    border: 2px solid #34495e;
+    margin: 50px 10px;
+    border: 2px solid white;
     float: left;
     width: 300px;
     height: auto;
-    color: black;
+    color: white;
     text-align: center;
-    padding: 20px;
-  }
+    padding: 10px;
+}
   
   div.roomdetail:hover {
     border: 2px solid #3B3B98;

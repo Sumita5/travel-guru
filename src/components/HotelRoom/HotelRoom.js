@@ -24,17 +24,13 @@ const HotelRoom = () => {
     const hotelDetails = hotelData.filter(city => city.name === locationName);
     return (
         <div className="hotelRoom">
-            
-            <div className="map"><Map  /></div>
-            <div className='hotels'>
-                {hotelDetails.map(place => <RoomDetail showBooking={true} bookingPlace={place}></RoomDetail>)}
-                <ColorButton className='backToHome'><Link to='/home'>
+            <ColorButton className='backToHome'><Link to='/home'>
                             Back to Home
-                            </Link> </ColorButton>
-                
-            </div>
-            
-            
+                            </Link> </ColorButton>   
+            <div>
+                {hotelDetails.map(place => <RoomDetail showBooking={true} bookingPlace={place}></RoomDetail>)}
+                <div className="map"><Map  /></div>       
+            </div>                         
         </div>
     );
 };
