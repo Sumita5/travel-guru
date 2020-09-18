@@ -11,8 +11,8 @@ const RoomDetail = (props) => {
                 <img src={roomImage} alt="" width="600" height="400" />
                 <div class="description">
                     {details}<br/>
-                    <h5>{rank}</h5>
-                <h6>{price}</h6>
+                    <h5>Rank: {rank}</h5>
+                <h6>Price: {price}</h6>
                     </div>
                 
             </div>

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -10,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useForm, Controller, errors} from 'react-hook-form'
+import {useForm, Controller} from 'react-hook-form'
 import DividerWithText from '../DividerWithText/DividerWithText';
 import './SignIn.css';
 import fb from '../../images/fb.png';
