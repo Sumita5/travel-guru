@@ -27,7 +27,7 @@ const HotelRoom = () => {
             
             <div className="map"><Map  /></div>
             <div className='hotels'>
-                {hotelDetails.map(place => <RoomDetail bookingPlace={place}></RoomDetail>)}
+                {hotelDetails.map(place => <RoomDetail showBooking={true} bookingPlace={place}></RoomDetail>)}
                 <ColorButton className='backToHome'><Link to='/home'>
                             Back to Home
                             </Link> </ColorButton>

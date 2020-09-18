@@ -22,3 +22,14 @@ div.roomdetail {
     padding: 15px;
     text-align: center;
   }
+
+  div.roomdetail button{
+      background-color: orange;
+      border-radius: 50% 50%;
+      height: 30px;
+      width: 30px;
+      float: right;
+      border: none;
+      color: black;
+      font-weight: bold;
+  }

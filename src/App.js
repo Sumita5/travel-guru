@@ -11,6 +11,7 @@ import SignIn from './components/SignIn/SignIn';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import HotelRoom from './components/HotelRoom/HotelRoom';
 import NotFound from './components/NotFound/NotFound';
+import Success from './components/Success/Success';
 
 
 export const UserContext = createContext();
@@ -26,6 +27,9 @@ function App() {
                 <Route path="/signin"><SignIn/></Route>
                 <PrivateRoute path="/hotelroom/:locationName">
                 <HotelRoom />
+                </PrivateRoute>
+                <PrivateRoute path="/Success/:hotelName">
+                <Success />
                 </PrivateRoute>
                 <Route exact path="/"><Home /></Route>
                 <Route path="/*"><NotFound /></Route>

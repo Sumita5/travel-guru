@@ -19,6 +19,7 @@
     color: white;
     text-align: center;
 }
+
 .bookingCard{
     flex-grow: 2;
     width: 300px;

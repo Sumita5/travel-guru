@@ -10,9 +10,6 @@ const LocationPin = ({ text }) => (
       <p className="pin-text">{text}</p>
     </div>
   )
- 
-
-
 
 const Map = (props) => {
     const {locationName} = useParams();
@@ -24,9 +21,7 @@ const Map = (props) => {
             hotel1 : hotelDetails[0].hotelName,
             hotel2 : hotelDetails[1].hotelName, 
             hotel3 : hotelDetails[2].hotelName
-        };
-            
-        
+        };       
       
     return (
         <div style={{ height: '100%', width: '100%' }}>

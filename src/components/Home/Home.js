@@ -7,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import { orange } from '@material-ui/core/colors';
 import spotData from '../../fakeData/spotData';
 
-
-
 const ColorButton = withStyles((theme) => ({
     root: {
       color: 'black',
@@ -36,8 +34,7 @@ const Home = () => {
                 }
                 <ColorButton onClick={()=> alert("Please Click On Your Destination Image")} variant="contained" color="primary" className={classes.margin}>
                     Booking
-                </ColorButton>
-           
+                </ColorButton>           
             </div>  
     );
 };

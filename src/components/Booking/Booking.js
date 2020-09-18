@@ -57,6 +57,11 @@ const Booking = () => {
             <div className='detail'>
                 <h1>{location.name}</h1>
                 <p>{location.description}</p>
+                <Link to={"/home"} >
+                        <ColorButton>
+                            Back to Home
+                        </ColorButton>
+                        </Link>
             </div>
 
             <div className='bookingCard'>
