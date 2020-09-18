@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useForm, Controller} from 'react-hook-form'
+import {useForm, Controller, errors} from 'react-hook-form'
 import DividerWithText from '../DividerWithText/DividerWithText';
 import './SignIn.css';
 import fb from '../../images/fb.png';
@@ -39,17 +39,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
+
+    initializeLoginFramework();
+
+
+    const classes = useStyles();
+    const {register,  control, errors} = useForm({mode: "all"});
+
+    
     const [newUser, setNewUser] = useState(false);
     const [user, setUser] = useState({
-    isSignedIn: false,
-    name: '',
-    email: '',
-    photo: '',
-    password: ''
-  });
-
-
-  initializeLoginFramework();
+            isSignedIn: false,
+            name: '',
+            email: '',
+            photo: '',
+            password: ''
+    });
 
   const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
   const history = useHistory();
@@ -61,10 +66,8 @@ const SignIn = () => {
     setLoggedInUser(res);
     if (redirect) {
         history.replace(from);
-    }
-    
+    }    
 };
-
 
 const googleSignIn = () => {
     handleGoogleSignIn()
@@ -73,35 +76,24 @@ const googleSignIn = () => {
       })
 }
 
-const signOut = () => {
-    handleSignOut()
-    .then(res => {
-        handleResponse(res, false);
-    })
-}
+
 const fbSignIn = () => {
   handleFbSignIn()
   .then(res => {
       handleResponse(res, true);
   })
 }
-
-
-
  
 const handleBlur = (e) => {
   
   let isFieldValid = true; 
-  console.log(e.target.value, e.target.name)
   if (e.target.name === 'email'){
     isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
   }
-  
   if (e.target.name === 'password'){
     const isPasswordValid = e.target.value.length > 6;
     const passwordHasNumber =  /\d{1}/.test(e.target.value);
-    isFieldValid = isPasswordValid && passwordHasNumber;
-    console.log(isPasswordValid && passwordHasNumber);    
+    isFieldValid = isPasswordValid && passwordHasNumber;  
   }
   if (isFieldValid){
       const newUserInfo = {...user};
@@ -109,11 +101,7 @@ const handleBlur = (e) => {
       setUser(newUserInfo);
   }
 }
-
-
-  const classes = useStyles();
-  const {register,  control} = useForm();
-
+  
   const handleSubmit = (e) => {
       if (newUser && user.email && user.password){
         createUserWithEmailAndPassword(user.name, user.email, user.password)
@@ -147,13 +135,11 @@ const handleBlur = (e) => {
                     </Typography>}
         <form className={classes.form} onSubmit={handleSubmit}>
             {newUser && 
-            <TextField
+                    <TextField
                         variant="outlined"
                         margin="normal"
                         inputRef={register({
-                            
-                            maxLength: 20,
-                            
+                            maxLength: 20
                           })}
                         fullWidth
                         id="name"
@@ -163,14 +149,12 @@ const handleBlur = (e) => {
                         autoFocus
                     />
                     }
-                   
-                    
-                     
-                    
+                    <span className='error-text'>{errors.name && "Name should not exceed 20 characters"}</span>
+                  
                     <TextField
                         variant="outlined"
                         margin="normal"
-                        inputRef={register}
+                        inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
                         required
                         fullWidth
                         id="email"
@@ -180,11 +164,14 @@ const handleBlur = (e) => {
                         autoFocus
                         onBlur={handleBlur}
                     />
+
+                    <span className='error-text'>{errors.email?.type === "required" && "Email is required"}
+                    {errors.email?.type === "pattern" &&"Your email is invalid"}</span>
                     
                     <TextField
                         variant="outlined"
                         margin="normal"
-                        inputRef={register}
+                        inputRef={register({ required: true, pattern: /\d{1}/ })}  
                         required
                         fullWidth
                         name="password"
@@ -194,10 +181,15 @@ const handleBlur = (e) => {
                         autoComplete="current-password"
                         onBlur={handleBlur}
                     />
-                 {newUser && <TextField
+
+                    <span className='error-text'>{errors.password?.type === "required" && "Password is required"}
+                    {errors.password?.type === "pattern" && "Password must contain at least one number and should be at least 6 characters"}</span>
+                    <br/>
+
+                {newUser && <TextField
                         variant="outlined"
                         margin="normal"
-                        inputRef={register}
+                        inputRef={register({ required: true, pattern: /\d{1}/ })}
                         required
                         fullWidth
                         name="confirmpassword"
@@ -206,7 +198,13 @@ const handleBlur = (e) => {
                         id="confirmpassword"
                         autoComplete="current-password"
                     />}
-                    <input type="submit" value={newUser ? "Create an account" : "Login"}/>
+
+                    <span className='error-text'>{errors.confirmpassword?.type === "required" && "Password is required"}
+                    {errors.confirmpassword?.type === "pattern" && "Password must contain at least one number and should be at least 6 characters"}</span>
+                    <br/>
+
+
+                    <input className='submit-button' type="submit" value={newUser ? "Create an account" : "Login"}/>
                     <br/>
                  
                    
@@ -217,19 +215,15 @@ const handleBlur = (e) => {
                         label="Remember me"
                     />}
                     
-                    {newUser ?
-                        
+                    {newUser 
+                        ?
                             <Grid container>
                                 <Grid item xs>
-                                
                                     Already have an account?
-                                
                                 </Grid>
                                 <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id=""/>
                                 <Grid item >
-                                
                                     {"Login"}
-
                                 </Grid>
                             </Grid> 
                         :
@@ -248,29 +242,13 @@ const handleBlur = (e) => {
                                 
                                 </Grid>
                             </Grid>
-                            }
-                    
+                        }    
         </form>
-        
-        
         </div>
-      <DividerWithText>Or</DividerWithText>
-      <button onClick={fbSignIn} class="button"><img src={fb} alt=""/><b>Continue with Facebook</b></button>
-      <br/>
-      {
-      user.isSignedIn && <div>
-      <p> Welcome, {user.name}!</p>
-      <p>Your email: {user.email}</p>
-      <img src={user.photo} alt=""/>
-      </div>
-    }
-    {user.isSignedIn 
-        ? 
-            <button onClick={signOut}>Sign out</button> 
-        :
-            <button onClick={googleSignIn} class="button"><img src={google} alt=""/><b>Continue with Google</b></button>
-    }
-      
+                <DividerWithText>Or</DividerWithText>
+                <button onClick={fbSignIn} class="pill-button"><img src={fb} alt=""/><b>Continue with Facebook</b></button>
+                <br/>
+                <button onClick={googleSignIn} class="pill-button"><img src={google} alt=""/><b>Continue with Google</b></button>
     </Container>
   );
 }

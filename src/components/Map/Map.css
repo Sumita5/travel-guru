@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     width: 180px;
-    color: var(--main-blue);
   }
   
   .pin-icon {

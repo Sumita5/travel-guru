@@ -1,30 +1,40 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Hotels from '../../fakeData/Hotels';
+import hotelData from '../../fakeData/hotelData';
 import Map from '../Map/Map';
 import RoomDetail from '../RoomDetail/RoomDetail';
+import {Link} from "react-router-dom";
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { orange } from '@material-ui/core/colors';
 import './HotelRoom.css';
 
-const location = {
-    address: '1600 Amphitheatre Parkway, Mountain View, california.',
-    lat: 21.4272,
-    lng: 92.0058,
-  }
-
+const ColorButton = withStyles((theme) => ({
+    root: {
+      color: 'black',
+      backgroundColor: orange[500],
+      '&:hover': {
+        backgroundColor: orange[700],
+      },
+    },
+}))(Button);
 
 const HotelRoom = () => {
     const {locationName} = useParams();
-    console.log(locationName);
-    const room = Hotels.filter(city => city.name === locationName);    
-
+    const hotelDetails = hotelData.filter(city => city.name === locationName);
     return (
         <div className="hotelRoom">
             
-            <div className="map"><Map location={location} zoomLevel={17} /></div>
-            <div>{room.map(name => <RoomDetail room={name}></RoomDetail>)}</div>
+            <div className="map"><Map  /></div>
+            <div className='hotels'>
+                {hotelDetails.map(place => <RoomDetail bookingPlace={place}></RoomDetail>)}
+                <ColorButton className='backToHome'><Link to='/home'>
+                            Back to Home
+                            </Link> </ColorButton>
+                
+            </div>
             
-
-           
+            
         </div>
     );
 };

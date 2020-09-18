@@ -1,6 +1,8 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import RoomIcon from '@material-ui/icons/Room';
+import { useParams } from 'react-router-dom';
+import hotelData from '../../fakeData/hotelData';
 
 const LocationPin = ({ text }) => (
     <div className="pin">
@@ -12,24 +14,26 @@ const LocationPin = ({ text }) => (
 
 
 
-const Map = () => {
-    const defaultProps = {
-        center: {
-          lat: 21.4272,
-          lng: 92.0058
-        },
-        zoom: 15}
-        const pins = {
-            hotel1 :'Sea Gull Hotel',
-            hotel2 :'Sea Paradise', 
-            hotel3 :'Ocean dream'}
+const Map = (props) => {
+    const {locationName} = useParams();
+    const mapDetails = hotelData.find(city => city.name === locationName);
+    const hotelDetails = hotelData.filter(city => city.name === locationName);
+    
+    const defaultProps = mapDetails.center;
+        const pins ={ 
+            hotel1 : hotelDetails[0].hotelName,
+            hotel2 : hotelDetails[1].hotelName, 
+            hotel3 : hotelDetails[2].hotelName
+        };
+            
+        
       
     return (
-        <div style={{ height: '50%', width: '50%' }}>
+        <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key:'AIzaSyASLLNjnXnUS3pZrG78YANjo9uIC0WExFw' }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
+          defaultCenter={defaultProps}
+          defaultZoom={15}
         >
             <LocationPin
           

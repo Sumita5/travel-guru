@@ -1,4 +1,4 @@
-.button {
+.pill-button {
     background-color: #ddd;
     border: none;
     color: black;
@@ -10,7 +10,20 @@
     cursor: pointer;
     border-radius: 16px;
   }
-  .button img {
+  .pill-button img {
       width: 32px;
       height: 32px;
+  }
+  .submit-button{
+      background-color: #45aaf2;
+      color: black;
+      font-size: 14px;
+      font-weight: bold;
+    width: 400px;
+    height: 40px;
+    border: 1px solid  #45aaf2;
+  }
+  .error-text{
+      color: red;
+      font-size: 12px;
   }

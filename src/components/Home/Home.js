@@ -1,20 +1,11 @@
-
-
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import Header from '../Header/Header';
 import './Home.css';
 import Main from '../Main/Main';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { orange } from '@material-ui/core/colors';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-import Booking from '../Booking/Booking';
-import fakeData from '../../fakeData/fakeData';
+import spotData from '../../fakeData/spotData';
 
 
 
@@ -34,36 +25,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
-// export const SpotContext = createContext();
-
 const Home = () => {
     const classes = useStyles();
-    const [spots, setSpots] = useState((fakeData));
+    const spots = spotData
     return (
-    // <SpotContext.Provider value={[spots, setSpots]}>
         <div className="home">
-                  <Header/>
-                
+                <Header/>               
                 {
-                        spots.map(spot => <Main
-                            spot={spot}></Main>)
-                    }
-                
-                    
-               
-                <Link to='/booking'>
-                <ColorButton variant="contained" color="primary" className={classes.margin}>
-                Booking
+                    spots.map(spot => <Main spot={spot}></Main>)
+                }
+                <ColorButton onClick={()=> alert("Please Click On Your Destination Image")} variant="contained" color="primary" className={classes.margin}>
+                    Booking
                 </ColorButton>
-            </Link>
-                
-            </div>
-    // </SpotContext.Provider>
-            
-            
-       
+           
+            </div>  
     );
 };
 

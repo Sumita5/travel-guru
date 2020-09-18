@@ -5,7 +5,7 @@ import { Card, CardActions, CardContent } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { orange } from '@material-ui/core/colors';
 import './Booking.css';
-import fakeData from '../../fakeData/fakeData';
+import spotData from '../../fakeData/spotData';
 import { Link, useParams } from 'react-router-dom';
 
 
@@ -48,14 +48,17 @@ const useStyles = makeStyles((theme) => ({
 
 const Booking = () => {
     const {locationName} = useParams();
-    const location = fakeData.find(city => city.name === locationName);
+    const location = spotData.find(city => city.name === locationName);
     const classes = useStyles();
+
     return (
         <div className='booking'>
+            
             <div className='detail'>
-          <h1>{location.name}</h1>
+                <h1>{location.name}</h1>
                 <p>{location.description}</p>
             </div>
+
             <div className='bookingCard'>
             <Card className={classes.card}>
             <CardContent>
